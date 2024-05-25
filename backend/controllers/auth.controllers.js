@@ -2,12 +2,39 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import genrateTokenAndSetCookie from "../utils/generateToken.js";
 
-export const login = (req, res) => {
-  res.send("Login user");
+export const login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+    const isPasswordCorrect = bcrypt.compare(password, user?.password || "");
+
+    if (!user || !isPasswordCorrect) {
+      return res.status(400).json({ message: "Invalid Username or Password" });
+    }
+
+    genrateTokenAndSetCookie(user._id, res);
+
+    res.status(200).json({
+      _id: user._id,
+      fullname: user.fullname,
+      username: user.username,
+      profilePic: user.profilePic,
+    });
+  } catch (error) {
+    console.log("Login error", error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 
-export const logout = (req, res) => {
-  res.send("Logout user");
+export const logout = async (req, res) => {
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    res.status(200).json({ message: "Logout successfully" });
+  } catch (error) {
+    console.log("Logout error", error.message);
+    res.status(500).json({ message: "Something went wrong" });
+  }
 };
 
 export const signup = async (req, res) => {
