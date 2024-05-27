@@ -42,13 +42,13 @@ export const signup = async (req, res) => {
     const { fullname, username, password, confirmpassword, gender } = req.body;
 
     if (password != confirmpassword) {
-      res.status(400).json({ message: "Password does not match" });
+      return res.status(400).json({ message: "Password does not match" });
     }
 
     const user = await User.findOne({ username });
 
     if (user) {
-      res.send("User already exists");
+      return res.send("User already exists");
     }
 
     // TODO: Hash Pasword
