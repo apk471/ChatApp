@@ -3,12 +3,12 @@
 This is a realtime chat application built using the MERN stack.
 
 ## Deployed Link :
+<a href="https://chatapp-5aj0.onrender.com/">App Link</a>
 
-https://chatapp-5aj0.onrender.com/
 
 ## Live Demo Of App:
+<a href="https://drive.google.com/file/d/10YeG9AF9tJCjg_fiAIaud3TJKnHHfTj9/view?usp=sharing">Video Link</a>
 
-https://drive.google.com/file/d/10YeG9AF9tJCjg_fiAIaud3TJKnHHfTj9/view?usp=sharing
 
 ## Tech Stack
 
